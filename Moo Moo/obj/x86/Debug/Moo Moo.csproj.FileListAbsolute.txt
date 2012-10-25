@@ -1,0 +1,27 @@
+C:\Documents and Settings\Exterminator\Local Settings\Application Data\Temporary Projects\Moo Moo\bin\Debug\Moo Moo.exe
+C:\Documents and Settings\Exterminator\Local Settings\Application Data\Temporary Projects\Moo Moo\bin\Debug\Moo Moo.pdb
+C:\Documents and Settings\Exterminator\Local Settings\Application Data\Temporary Projects\Moo Moo\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Exterminator\Local Settings\Application Data\Temporary Projects\Moo Moo\obj\x86\Debug\Moo_Moo.Form1.resources
+C:\Documents and Settings\Exterminator\Local Settings\Application Data\Temporary Projects\Moo Moo\obj\x86\Debug\Moo_Moo.Properties.Resources.resources
+C:\Documents and Settings\Exterminator\Local Settings\Application Data\Temporary Projects\Moo Moo\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Exterminator\Local Settings\Application Data\Temporary Projects\Moo Moo\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Exterminator\Local Settings\Application Data\Temporary Projects\Moo Moo\obj\x86\Debug\Moo Moo.exe
+C:\Documents and Settings\Exterminator\Local Settings\Application Data\Temporary Projects\Moo Moo\obj\x86\Debug\Moo Moo.pdb
+C:\Documents and Settings\Exterminator\my documents\visual studio 2010\Projects\Moo Moo\Moo Moo\obj\x86\Debug\Moo Moo.exe
+C:\Documents and Settings\Exterminator\my documents\visual studio 2010\Projects\Moo Moo\Moo Moo\obj\x86\Debug\Moo Moo.pdb
+C:\Documents and Settings\Exterminator\My Documents\Visual Studio 2010\Projects\Moo Moo\Moo Moo\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Exterminator\My Documents\Visual Studio 2010\Projects\Moo Moo\Moo Moo\obj\x86\Debug\Moo_Moo.Form1.resources
+C:\Documents and Settings\Exterminator\My Documents\Visual Studio 2010\Projects\Moo Moo\Moo Moo\obj\x86\Debug\Moo_Moo.Properties.Resources.resources
+C:\Documents and Settings\Exterminator\My Documents\Visual Studio 2010\Projects\Moo Moo\Moo Moo\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Exterminator\My Documents\Visual Studio 2010\Projects\Moo Moo\Moo Moo\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Exterminator\My Documents\Visual Studio 2010\Projects\Moo Moo\Moo Moo\bin\Debug\Moo Moo.exe
+C:\Documents and Settings\Exterminator\My Documents\Visual Studio 2010\Projects\Moo Moo\Moo Moo\bin\Debug\Moo Moo.pdb
+D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\Moo Moo.exe
+D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\Moo Moo.pdb
+D:\Projects\PSC_301\Moo Moo\bin\Debug\Moo Moo.exe
+D:\Projects\PSC_301\Moo Moo\bin\Debug\Moo Moo.pdb
+D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\Moo_Moo.Form1.resources
+D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\Moo_Moo.Properties.Resources.resources
+D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\GenerateResource.write.1.tlog
