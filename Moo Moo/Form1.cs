@@ -14,7 +14,11 @@ namespace Moo_Moo
         private int[] inputedValues = { -1, -1, -1, -1 };
         private int[] acceptedValues = { 8, 46, 36, 35, 34, 33, 37, 38, 39, 40 };
         private bool keyPress = false;
+        private int[] question = {-1,-1,-1,-1};
         DataSet ds;
+        private bool DEBUG = true; // Only if debugging
+        private int cows { get; set; }
+        private int bulls { get; set; }
 
         public Form1()
         {
@@ -169,8 +173,8 @@ namespace Moo_Moo
         private void Form1_Load(object sender, EventArgs e)
         {
             GuessBtn.Enabled = false;
-            ds = new DataSet(ref ListTest);
-            ds.PrintSet();
+            ds = new DataSet();
+            ds.PrintSet(ref Debugprint);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -181,51 +185,249 @@ namespace Moo_Moo
             if  ( (col >=0 && col <=3 ) && (val >=0 && val <= 9) )
             {
                 ds.RemoveFromCol(col, val);
-                ds.PrintSet();
+                ds.PrintSet(ref Debugprint);
             }
         }
+
+        private void GuessBtn_Click(object sender, EventArgs e)
+        {
+            GuessBox.ReadOnly = true;
+            GenQuestion();
+            Answer();
+            CleanMax3();
+        }
+        private void ResetQuestion()
+        {
+            for (int i = 0; i < question.Length; i++)
+            {
+                question[i] = -1;
+            }
+        }
+        private void GenQuestion() 
+        {
+            ResetQuestion();
+            int b = 0,y;
+
+            for (int i = 0; i < 4; i++)
+            {
+                b = 0;
+                y = ds.GetNextByColumn(i, b);
+                while(question.Contains(y))
+                {
+                    y = ds.GetNextByColumn(i,++b);
+                }
+                question[i] = y;
+                ds.IncreaseRankOf(y,i);
+                ds.asdf(ref Debug2);
+            }
+        }
+
+        private void Answer()
+        {
+            cows = bulls = 0;
+            for (int i = 0; i < question.Length; i++)
+            {
+                for (int j = 0; j <question.Length; j++)
+                {
+                    if (question[i] == inputedValues[j]) 
+                    {
+                        if (i == j)
+                        {
+                            bulls++;
+                        }
+                        else
+                        {
+                            cows++;
+                        }
+                    }
+                }
+            }
+            if (DEBUG)
+            {
+                foreach (var dd in question)
+                {
+                    GuessingNum.Text += dd.ToString();
+                }
+                GuessingNum.Text += "C:" + cows + " B:" + bulls + "\n";
+            }
+        }
+
+        private void CleanMax3()
+        {
+            if (cows > 0 && bulls == 0) 
+            {
+                for (int i = 0; i < question.Length; i++)
+			    {
+                    ds.RemoveFromCol(i, question[i]);
+			    }
+                
+            }
+            else if (bulls > 0 && cows == 0)
+            {
+                for (int i = 0; i < question.Length; i++)
+                {
+                    ds.RemoveExeptCol(i, question[i]);
+                }
+            }
+            else if (bulls == 0 && cows == 0)
+            {
+                for (int i = 0; i < question.Length; i++)
+                {
+                    ds.RemoveFromMa3x(question[i]);
+                }
+            }
+
+            ds.PrintSet(ref Realprint);			
+        }
+
     }
+
 
     public class DataSet
     {
-        private int[,] List = new int[10, 4];
-        Label t;
+        private int[,] Ma3x = new int[10, 4];
+        private int[,] Ma3xIndex = new int[10, 4];
+        private int[,] Rank = new int[10, 4];
 
-        public DataSet(ref Label f)
+        public void ResetRank()
         {
-            t = f;
+            for (int j = 0; j < 4 ; j++)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Rank[i, j] = 0;
+                }
+            }
+        }
+
+        public void IncreaseRankOf(int c, int val)
+        {
+            Rank[c, val]++;
+        }
+
+        /**
+         * Get next non-negative number from a given column
+         * The first non-marked number
+        */
+        public int GetNextByColumn(int c) { return GetNextByColumn(c, 0); }
+        public int GetNextByColumn(int c, int b)
+        {
+            int tmp = Ma3x[b, c];
+
+            //while (Rank[tmp, c] > cRank)
+            while(tmp == -1)
+            {
+                tmp = Ma3x[++b, c];
+            }
+            return tmp;
+        }
+
+
+
+        public DataSet()
+        {
+     
             int count = 0;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 4; i++)
             {
-                for (int j = 0; j < 4; j++)
+                count = 0;
+                for (int j = 0; j < 10; j++)
                 {
-                    List[i, j] = count;
+                    Ma3x[j, i] = count;
+                    Ma3xIndex[j, i] = count++;
                 }
-                count++;
             }
+     
+            /*
+
+            Random rand = new Random();
+
+            int count = rand.Next(0, 9);
+            int[] tmp = new int[10];
+            for (int k = 0; k < 10; k++)
+            {
+                tmp[k] = -1;
+            }
+            
+            for (int j = 0; j < 4; j++)     
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    while (tmp.Contains(count))
+                    {
+                        count = count == 9 ? 0 : count + 1;
+                    }
+                    
+                    Ma3x[i,j] = count;
+                    Ma3xIndex[count, j] = i;
+                    tmp[i] = count;
+                    // 
+                    count = rand.Next(0, 9);                    
+                }
+
+                for (int k = 0; k < 10; k++)
+                {
+                    tmp[k] = -1;
+                }
+            }
+             * */
         }
 
-        public void PrintSet()
+        public void PrintSet(ref Label f)
         {
-            this.t.Text = "";
+            f.Text = "";
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    this.t.Text += List[i, j].ToString() + "   ";
+                    f.Text += Ma3x[i, j].ToString() + "   ";
                 }
-                this.t.Text += "\n";
+                f.Text += "\n";
             }
         }
 
+        public void asdf(ref Label f) {
+            f.Text = "";
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    f.Text += Rank[i, j].ToString() + "   ";
+                }
+                f.Text += "\n";
+            }
+        }
+
+        /**
+         * Dido made these
+         */
         public void RemoveFromCol(int col, int val)
         {
+            /*
             for (int i = 0; i < 10; i++)
             {
-                if (List[i, col] == val)
+                if (Ma3x[i, col] == val)
                 {
-                    List[i, col] = -1;
+                    Ma3x[i, col] = -1;
                 }
+            }
+             * */
+
+            //ANdy
+            Ma3x[Ma3xIndex[val, col], col] = -1;
+        }
+        public void RemoveExeptCol(int col, int val)
+        {
+            int tmp = Ma3x[Ma3xIndex[val, col], col];
+            RemoveFromMa3x(val);
+            Ma3x[Ma3xIndex[val, col], col] = tmp;
+        }
+
+        public void RemoveFromMa3x(int val)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                RemoveFromCol(i, val);
             }
         }
     }
