@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Moo_Moo
@@ -12,7 +10,8 @@ namespace Moo_Moo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            MainWindow main = new MainWindow();
+            Application.Run(main);
         }
     }
 }

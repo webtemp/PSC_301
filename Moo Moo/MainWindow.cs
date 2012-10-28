@@ -9,92 +9,44 @@ using System.Windows.Forms;
 
 namespace Moo_Moo
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
+        #region Variable Declaration
+
         private int[] inputedValues = { -1, -1, -1, -1 };
         private int[] acceptedValues = { 8, 46, 36, 35, 34, 33, 37, 38, 39, 40 };
         private bool keyPress = false;
         private int[] question = {-1,-1,-1,-1};
-        DataSet ds;
         private bool DEBUG = true; // Only if debugging
         private int cows { get; set; }
         private int bulls { get; set; }
+        DataSet ds;
+        AboutUs a = new AboutUs();
 
-        public Form1()
+        #endregion
+
+        #region Intialization
+
+        public MainWindow()
         {
             // GenerateRandom();
             InitializeComponent();
         }
 
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+            GuessBtn.Enabled = false;
+            ds = new DataSet();
+            ds.PrintSet(ref Debugprint);
+        }
+
+        #endregion
+
+        #region Input Filter
+
         private bool isAccepted(int d)
         {
             return acceptedValues.Contains(d);
-        }
-
-        private void GuessBox_OnKeyUp(object sender, KeyEventArgs e)
-        {
-            // Set the digits
-            SetDigits();
-            
-            //Print the numbers to the screen
-            PrintGuessingNumber();
-
-            //Disable the selection
-            DisableSelection(e.KeyValue);
-
-            if (GuessBox.Text.Length >= 4)
-            {
-                GuessBtn.Enabled = true;
-                e.SuppressKeyPress = true;
-            }
-            else
-            {
-                GuessBtn.Enabled = false;
-            }
-
-            int code = (int)e.KeyCode;
-            string Text = ((TextBox)sender).Text;
-            int Num;
-            try
-            {
-                int DIGITS;
-                int.TryParse(Text.Substring(0, 1), out DIGITS);
-                int TENS;
-                int.TryParse(Text.Substring(1, 1), out TENS);
-                int HUNDREDS;
-                int.TryParse(Text.Substring(2, 1), out HUNDREDS);
-                int THOUSENTS;
-                int.TryParse(Text.Substring(3, 1), out THOUSENTS);
-
-                Num = (DIGITS * 1000) + (TENS * 100) + (HUNDREDS * 10) + THOUSENTS;
-                //ComputerOutput.Text = Num.ToString();
-            }
-            catch (ArgumentException afsfsa) { }
-
-            ProgBar1.Value = GuessBox.Text.Length * 25;
-            keyPress = false;
-        }
-
-        private bool CheckForDigits(int digit)
-        {
-            return inputedValues.Contains(digit);
-        }
-
-        private void SetDigits()
-        {
-            string s = GuessBox.Text.ToString();
-            string g;
-            for (int i = 0; i < 4; i++)
-            {
-                try{
-                    g = s[i].ToString();
-                }
-                catch(IndexOutOfRangeException exp)
-                {
-                    g = "-1";
-                }
-                inputedValues[i] = int.Parse(g);
-            }
         }
 
         private void GuessBox_OnKeyDown(object sender, KeyEventArgs e)
@@ -133,16 +85,71 @@ namespace Moo_Moo
             keyPress = true;
         }
 
-        private void PrintGuessingNumber()
+        private void GuessBox_OnKeyUp(object sender, KeyEventArgs e)
         {
-            ComputerOutput.Text = "Inputed Values:";
-            TEMP.Visible = true;
-            TEMP.Text = "";
-            foreach( int i in inputedValues)
-            {
-                TEMP.Text += i + " ";
-            }
+            // Set the digits
+            SetDigits();
             
+            // Print the numbers to the screen
+            PrintGuessingNumber();
+
+            // Disable the selection
+            DisableSelection(e.KeyValue);
+
+            if (GuessBox.Text.Length >= 4)
+            {
+                GuessBtn.Enabled = true;
+                e.SuppressKeyPress = true;
+            }
+            else
+            {
+                GuessBtn.Enabled = false;
+            }
+
+            int code = (int)e.KeyCode;
+            string Text = ((TextBox)sender).Text;
+            int Num;
+            try
+            {
+                int DIGITS;
+                int.TryParse(Text.Substring(0, 1), out DIGITS);
+                int TENS;
+                int.TryParse(Text.Substring(1, 1), out TENS);
+                int HUNDREDS;
+                int.TryParse(Text.Substring(2, 1), out HUNDREDS);
+                int THOUSENTS;
+                int.TryParse(Text.Substring(3, 1), out THOUSENTS);
+
+                Num = (DIGITS * 1000) + (TENS * 100) + (HUNDREDS * 10) + THOUSENTS;
+                //ComputerOutput.Text = Num.ToString();
+            }
+            catch (ArgumentException afsfsa) { }
+
+            ProgBar1.Value = GuessBox.Text.Length * 25;
+            keyPress = false;
+        }
+
+        private void SetDigits()
+        {
+            string s = GuessBox.Text.ToString();
+            string g;
+            for (int i = 0; i < 4; i++)
+            {
+                try
+                {
+                    g = s[i].ToString();
+                }
+                catch (IndexOutOfRangeException exp)
+                {
+                    g = "-1";
+                }
+                inputedValues[i] = int.Parse(g);
+            }
+        }
+
+        private bool CheckForDigits(int digit)
+        {
+            return inputedValues.Contains(digit);
         }
 
         private void DisableSelection(int code = 0)
@@ -160,6 +167,10 @@ namespace Moo_Moo
             }
         }
 
+        #endregion
+
+        #region Mouse Filter
+
         private void GuessBox_MouseDown(object sender, MouseEventArgs e)
         {
             DisableSelection();
@@ -170,11 +181,18 @@ namespace Moo_Moo
             DisableSelection();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        #endregion
+
+        private void PrintGuessingNumber()
         {
-            GuessBtn.Enabled = false;
-            ds = new DataSet();
-            ds.PrintSet(ref Debugprint);
+            ComputerOutput.Text = "Inputed Values:";
+            TEMP.Visible = true;
+            TEMP.Text = "";
+            foreach( int i in inputedValues)
+            {
+                TEMP.Text += i + " ";
+            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -196,6 +214,7 @@ namespace Moo_Moo
             Answer();
             CleanMax3();
         }
+
         private void ResetQuestion()
         {
             for (int i = 0; i < question.Length; i++)
@@ -203,6 +222,7 @@ namespace Moo_Moo
                 question[i] = -1;
             }
         }
+
         private void GenQuestion() 
         {
             ResetQuestion();
@@ -215,6 +235,7 @@ namespace Moo_Moo
                 while(question.Contains(y))
                 {
                     y = ds.GetNextByColumn(i,++b);
+                    if (b == 9) { b = 0; }
                 }
                 question[i] = y;
                 ds.IncreaseRankOf(y,i);
@@ -254,13 +275,17 @@ namespace Moo_Moo
 
         private void CleanMax3()
         {
-            if (cows > 0 && bulls == 0) 
+            if (bulls == 4)
+            {
+                ResetGame.WithCondition(Condition.LOOSE);
+            }
+            else if (cows > 0 && bulls == 0)
             {
                 for (int i = 0; i < question.Length; i++)
-			    {
+                {
                     ds.RemoveFromCol(i, question[i]);
-			    }
-                
+                }
+
             }
             else if (bulls > 0 && cows == 0)
             {
@@ -280,155 +305,28 @@ namespace Moo_Moo
             ds.PrintSet(ref Realprint);			
         }
 
-    }
+        private void GuessBox_TextChanged(object sender, EventArgs e){}
 
+        #region Menu Actions
 
-    public class DataSet
-    {
-        private int[,] Ma3x = new int[10, 4];
-        private int[,] Ma3xIndex = new int[10, 4];
-        private int[,] Rank = new int[10, 4];
-
-        public void ResetRank()
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int j = 0; j < 4 ; j++)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    Rank[i, j] = 0;
-                }
-            }
+            Close();
         }
 
-        public void IncreaseRankOf(int c, int val)
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Rank[c, val]++;
+            ResetGame.WithCondition(Condition.NEW_GAME);
         }
 
-        /**
-         * Get next non-negative number from a given column
-         * The first non-marked number
-        */
-        public int GetNextByColumn(int c) { return GetNextByColumn(c, 0); }
-        public int GetNextByColumn(int c, int b)
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int tmp = Ma3x[b, c];
-
-            //while (Rank[tmp, c] > cRank)
-            while(tmp == -1)
+            if ( a.Visible == false && !a.IsDisposed )
             {
-                tmp = Ma3x[++b, c];
-            }
-            return tmp;
-        }
-
-
-
-        public DataSet()
-        {
-     
-            int count = 0;
-            for (int i = 0; i < 4; i++)
-            {
-                count = 0;
-                for (int j = 0; j < 10; j++)
-                {
-                    Ma3x[j, i] = count;
-                    Ma3xIndex[j, i] = count++;
-                }
-            }
-     
-            /*
-
-            Random rand = new Random();
-
-            int count = rand.Next(0, 9);
-            int[] tmp = new int[10];
-            for (int k = 0; k < 10; k++)
-            {
-                tmp[k] = -1;
-            }
-            
-            for (int j = 0; j < 4; j++)     
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    while (tmp.Contains(count))
-                    {
-                        count = count == 9 ? 0 : count + 1;
-                    }
-                    
-                    Ma3x[i,j] = count;
-                    Ma3xIndex[count, j] = i;
-                    tmp[i] = count;
-                    // 
-                    count = rand.Next(0, 9);                    
-                }
-
-                for (int k = 0; k < 10; k++)
-                {
-                    tmp[k] = -1;
-                }
-            }
-             * */
-        }
-
-        public void PrintSet(ref Label f)
-        {
-            f.Text = "";
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    f.Text += Ma3x[i, j].ToString() + "   ";
-                }
-                f.Text += "\n";
+                a.Visible = true;
             }
         }
 
-        public void asdf(ref Label f) {
-            f.Text = "";
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    f.Text += Rank[i, j].ToString() + "   ";
-                }
-                f.Text += "\n";
-            }
-        }
-
-        /**
-         * Dido made these
-         */
-        public void RemoveFromCol(int col, int val)
-        {
-            /*
-            for (int i = 0; i < 10; i++)
-            {
-                if (Ma3x[i, col] == val)
-                {
-                    Ma3x[i, col] = -1;
-                }
-            }
-             * */
-
-            //ANdy
-            Ma3x[Ma3xIndex[val, col], col] = -1;
-        }
-        public void RemoveExeptCol(int col, int val)
-        {
-            int tmp = Ma3x[Ma3xIndex[val, col], col];
-            RemoveFromMa3x(val);
-            Ma3x[Ma3xIndex[val, col], col] = tmp;
-        }
-
-        public void RemoveFromMa3x(int val)
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                RemoveFromCol(i, val);
-            }
-        }
+        #endregion
     }
 }

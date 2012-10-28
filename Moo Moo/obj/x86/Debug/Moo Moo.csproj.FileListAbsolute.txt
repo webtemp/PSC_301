@@ -21,7 +21,8 @@ D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\Moo Moo.pdb
 D:\Projects\PSC_301\Moo Moo\bin\Debug\Moo Moo.exe
 D:\Projects\PSC_301\Moo Moo\bin\Debug\Moo Moo.pdb
 D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\ResolveAssemblyReference.cache
-D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\Moo_Moo.Form1.resources
 D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\Moo_Moo.Properties.Resources.resources
 D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\GenerateResource.read.1.tlog
 D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\Moo_Moo.AboutUs.resources
+D:\Projects\PSC_301\Moo Moo\obj\x86\Debug\Moo_Moo.MainWindow.resources

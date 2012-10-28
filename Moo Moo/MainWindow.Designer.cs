@@ -1,6 +1,6 @@
 ﻿namespace Moo_Moo
 {
-    partial class Form1
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -45,6 +45,12 @@
             this.button1 = new System.Windows.Forms.Button();
             this.ProgBar1 = new System.Windows.Forms.ProgressBar();
             this.TEMP = new System.Windows.Forms.Label();
+            this.MenuGroup = new System.Windows.Forms.MenuStrip();
+            this.MenuMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.ComputerOutput.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -52,6 +58,7 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ColValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Col)).BeginInit();
+            this.MenuGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -59,7 +66,7 @@
             this.groupBox1.Controls.Add(this.OutcomeLabel);
             this.groupBox1.Controls.Add(this.GuessBtn);
             this.groupBox1.Controls.Add(this.GuessBox);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 31);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(366, 57);
             this.groupBox1.TabIndex = 0;
@@ -91,6 +98,7 @@
             this.GuessBox.Name = "GuessBox";
             this.GuessBox.Size = new System.Drawing.Size(73, 20);
             this.GuessBox.TabIndex = 0;
+            this.GuessBox.TextChanged += new System.EventHandler(this.GuessBox_TextChanged);
             this.GuessBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GuessBox_OnKeyDown);
             this.GuessBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GuessBox_OnKeyUp);
             this.GuessBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GuessBox_MouseDown);
@@ -107,9 +115,9 @@
             this.ComputerOutput.Controls.Add(this.ProgBar1);
             this.ComputerOutput.Controls.Add(this.TEMP);
             this.ComputerOutput.Cursor = System.Windows.Forms.Cursors.No;
-            this.ComputerOutput.Location = new System.Drawing.Point(12, 76);
+            this.ComputerOutput.Location = new System.Drawing.Point(12, 94);
             this.ComputerOutput.Name = "ComputerOutput";
-            this.ComputerOutput.Size = new System.Drawing.Size(366, 566);
+            this.ComputerOutput.Size = new System.Drawing.Size(366, 524);
             this.ComputerOutput.TabIndex = 1;
             this.ComputerOutput.TabStop = false;
             this.ComputerOutput.Text = "Computer Output";
@@ -122,7 +130,7 @@
             this.groupBox4.Size = new System.Drawing.Size(162, 193);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Debug2";
+            this.groupBox4.Text = "Debug 2";
             // 
             // Debug2
             // 
@@ -217,7 +225,7 @@
             // 
             // ProgBar1
             // 
-            this.ProgBar1.Location = new System.Drawing.Point(6, 537);
+            this.ProgBar1.Location = new System.Drawing.Point(9, 493);
             this.ProgBar1.Name = "ProgBar1";
             this.ProgBar1.Size = new System.Drawing.Size(353, 23);
             this.ProgBar1.TabIndex = 1;
@@ -230,16 +238,72 @@
             this.TEMP.Size = new System.Drawing.Size(0, 13);
             this.TEMP.TabIndex = 0;
             // 
-            // Form1
+            // MenuGroup
+            // 
+            this.MenuGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuMenu,
+            this.HelpMenu});
+            this.MenuGroup.Location = new System.Drawing.Point(0, 0);
+            this.MenuGroup.Name = "MenuGroup";
+            this.MenuGroup.Size = new System.Drawing.Size(390, 24);
+            this.MenuGroup.TabIndex = 2;
+            this.MenuGroup.Text = "Program Window";
+            // 
+            // MenuMenu
+            // 
+            this.MenuMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.MenuMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newGameToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.MenuMenu.Name = "MenuMenu";
+            this.MenuMenu.Size = new System.Drawing.Size(45, 20);
+            this.MenuMenu.Text = "&Menu";
+            // 
+            // newGameToolStripMenuItem
+            // 
+            this.newGameToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.newGameToolStripMenuItem.Text = "&New Game";
+            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.exitToolStripMenuItem.Text = "&Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // HelpMenu
+            // 
+            this.HelpMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.HelpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.HelpMenu.Name = "HelpMenu";
+            this.HelpMenu.Size = new System.Drawing.Size(40, 20);
+            this.HelpMenu.Text = "&Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.aboutToolStripMenuItem.Text = "&About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 654);
+            this.ClientSize = new System.Drawing.Size(390, 625);
             this.Controls.Add(this.ComputerOutput);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Form1";
+            this.Controls.Add(this.MenuGroup);
+            this.MainMenuStrip = this.MenuGroup;
+            this.Name = "MainWindow";
             this.Text = "Moo Moo";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ComputerOutput.ResumeLayout(false);
@@ -252,7 +316,10 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ColValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Col)).EndInit();
+            this.MenuGroup.ResumeLayout(false);
+            this.MenuGroup.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -275,6 +342,12 @@
         private System.Windows.Forms.Label GuessingNum;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label Debug2;
+        private System.Windows.Forms.MenuStrip MenuGroup;
+        private System.Windows.Forms.ToolStripMenuItem MenuMenu;
+        private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HelpMenu;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 
